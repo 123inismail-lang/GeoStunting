@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GeoStunting — WebGIS Pemetaan Stunting Kiaracondong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- ====== NAVBAR ====== -->
+<nav class="gs-nav">
+  <div class="gs-nav-inner">
+    <div class="gs-brand" onclick="gotoPage('beranda')">
+      <div class="gs-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><path d="M9 14V9l3-2 3 2v5"/></svg></div>
+      <div class="gs-brand-text"><span class="b1">Geo</span><span class="b2">Stunting</span><small>Pemetaan Spasial Stunting</small></div>
+    </div>
+    <button class="gs-burger" onclick="document.getElementById('gsmenu').classList.toggle('open')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <ul class="gs-menu" id="gsmenu">
+      <li><a href="#" data-pg="beranda" class="active" onclick="return nav(this)">Beranda</a></li>
+      <li><a href="#" data-pg="dashboard" onclick="return nav(this)">Dashboard</a></li>
+      <li><a href="#" data-pg="peta" onclick="return nav(this)">Peta Sebaran</a></li>
+      <li><a href="#" data-pg="edukasi" onclick="return nav(this)">Edukasi</a></li>
+      <li><a href="#" data-pg="tentang" onclick="return nav(this)">Tentang</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ====== BERANDA ====== -->
+<section class="gs-page active" id="page-beranda">
+  <div class="gs-hero">
+    <div class="gs-hero-inner">
+      <div>
+        <span class="gs-eyebrow" style="color:#bdf3ec">Kecamatan Kiaracondong &middot; Kota Bandung</span>
+        <h1>Cegah Stunting,<br>Wujudkan Generasi Sehat</h1>
+        <p>Sistem Informasi Geografis berbasis WebGIS untuk pemetaan dan analisis spasial sebaran stunting balita di Kecamatan Kiaracondong.</p>
+        <div class="gs-btn-row">
+          <a class="gs-btn gs-btn-primary" onclick="gotoPage('peta')">&#128506; Lihat Peta Sebaran</a>
+          <a class="gs-btn gs-btn-ghost" onclick="gotoPage('edukasi')">Pelajari Stunting</a>
+        </div>
+      </div>
+      <div class="gs-hero-img"><img src="hero.jpg" alt="Anak-anak Indonesia"></div>
+    </div>
+  </div>
+  <div class="gs-wrap">
+    <div class="gs-kpi-grid">
+      <div class="gs-kpi k1"><div class="ic">&#128104;</div><div class="v">680</div><div class="l">Balita Stunting</div></div>
+      <div class="gs-kpi k2"><div class="ic">&#128106;</div><div class="v">3.667</div><div class="l">Total Balita</div></div>
+      <div class="gs-kpi k3"><div class="ic">&#128200;</div><div class="v">18,5%</div><div class="l">Prevalensi</div></div>
+      <div class="gs-kpi k4"><div class="ic">&#127968;</div><div class="v">6</div><div class="l">Kelurahan</div></div>
+      <div class="gs-kpi k5"><div class="ic">&#9888;</div><div class="v">2</div><div class="l">Prioritas Tinggi</div></div>
+    </div>
+
+    <section style="margin-top:48px">
+      <span class="gs-eyebrow">Langkah &amp; Fitur Utama</span>
+      <h2 class="gs-sec-title">Jelajahi data stunting dalam 3 langkah</h2>
+      <div class="gs-feat-grid">
+        <div class="gs-feat"><div class="ic">&#129504;</div><h3>Pahami Stunting</h3><p>Pelajari pengertian, penyebab, dampak, dan cara pencegahan stunting secara ringkas.</p></div>
+        <div class="gs-feat"><div class="ic">&#128506;</div><h3>Lihat Peta Sebaran</h3><p>Akses peta interaktif sebaran kasus stunting per kelurahan di Kiaracondong.</p></div>
+        <div class="gs-feat"><div class="ic">&#129489;</div><h3>Aksi Pencegahan</h3><p>Temukan kelurahan prioritas dan rekomendasi intervensi berbasis analisis spasial.</p></div>
+      </div>
+    </section>
+
+    <section style="margin-top:42px">
+      <div class="gs-panel gs-panel-pad" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+        <div><h2 class="gs-sec-title" style="margin:0">Jelajahi Peta Interaktif</h2><p class="gs-sec-sub" style="margin:6px 0 0">Analisis data stunting secara spasial hingga tingkat kelurahan. Klik peta untuk memulai.</p></div>
+        <a class="gs-btn" style="background:var(--teal);color:#fff" onclick="gotoPage('dashboard')">Buka Dashboard &rarr;</a>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ====== DASHBOARD ====== -->
+<section class="gs-page" id="page-dashboard">
+  <div class="gs-wrap">
+    <span class="gs-eyebrow">Dashboard</span>
+    <h2 class="gs-sec-title">Dashboard Sebaran Stunting Kiaracondong</h2>
+    <p class="gs-sec-sub">Ringkasan indikator, peta sebaran, dan data per kelurahan.</p>
+    <div class="gs-kpi-grid">
+      <div class="gs-kpi k1"><div class="ic">&#128104;</div><div class="v">680</div><div class="l">Balita Stunting</div></div>
+      <div class="gs-kpi k2"><div class="ic">&#128106;</div><div class="v">3.667</div><div class="l">Total Balita</div></div>
+      <div class="gs-kpi k3"><div class="ic">&#128200;</div><div class="v">18,5%</div><div class="l">Prevalensi</div></div>
+      <div class="gs-kpi k4"><div class="ic">&#127968;</div><div class="v">6</div><div class="l">Kelurahan</div></div>
+      <div class="gs-kpi k5"><div class="ic">&#9888;</div><div class="v">2</div><div class="l">Prioritas Tinggi</div></div>
+    </div>
+
+    <div class="gs-dash">
+      <div class="gs-panel"><div class="gs-map-wrap"><iframe src="map.html" class="gs-map" id="mapDash" title="Peta WebGIS Stunting Kiaracondong" loading="lazy" allowfullscreen></iframe><button class="gs-fs-btn" onclick="toggleFS('mapDash')" title="Layar Penuh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg><span>Layar Penuh</span></button></div></div>
+      <div>
+        <div class="gs-panel gs-panel-pad">
+          <h3>Filter &amp; Analisis</h3>
+          <div class="gs-field"><label>Kelurahan</label><select id="filterKel" onchange="focusKelurahan(this.value)"><option value="all">Semua Kelurahan</option></select></div>
+          <div class="gs-field"><label>Periode</label><select><option>Tahun 2025</option><option>Tahun 2024</option></select></div>
+          <h3 style="margin-top:6px">Peringkat Prevalensi</h3>
+          <div id="miniBars"></div>
+        </div>
+        <div class="gs-nna">
+          <h4>&#128208; Analisis Tetangga Terdekat (NNA)</h4>
+          <div class="big">Mengelompok (Clustered)</div>
+          <p>Nilai indeks NNA = <b>0,65</b> (T&lt;1). Pola sebaran kasus stunting cenderung mengelompok pada kelurahan tertentu, bukan acak.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gs-panel" style="margin-top:18px">
+      <div class="gs-table-wrap">
+        <div class="gs-table-head"><h3 style="margin:0;color:var(--navy)">Data per Kelurahan</h3><button class="gs-dl" onclick="downloadCSV()">&#11015; Unduh Data (CSV)</button></div>
+        <table class="gs-tbl"><thead><tr><th>Kelurahan</th><th>Jumlah Balita</th><th>Kasus</th><th>Prevalensi</th><th>Ranking</th></tr></thead><tbody id="tblBody"></tbody></table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PETA ====== -->
+<section class="gs-page" id="page-peta">
+  <div class="gs-wrap">
+    <span class="gs-eyebrow">Peta Sebaran</span>
+    <h2 class="gs-sec-title">Peta WebGIS Sebaran Stunting</h2>
+    <p class="gs-sec-sub">Peta WebGIS hasil ekspor QGIS dengan batas asli 6 kelurahan, pilihan basemap (OpenStreetMap, Citra Satelit, ATR/BPN), kontrol layer, dan legenda. Klik tiap wilayah untuk melihat detail jumlah balita, kasus, dan prevalensi stunting.</p>
+    <div class="gs-panel"><div class="gs-map-wrap"><iframe src="map.html" class="gs-map tall" id="mapPeta" title="Peta WebGIS Stunting Kiaracondong" loading="lazy" allowfullscreen></iframe><button class="gs-fs-btn" onclick="toggleFS('mapPeta')" title="Layar Penuh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg><span>Layar Penuh</span></button></div></div>
+  </div>
+</section>
+
+<!-- ====== EDUKASI ====== -->
+<section class="gs-page" id="page-edukasi">
+  <div class="gs-wrap">
+    <span class="gs-eyebrow">Edukasi</span>
+    <h2 class="gs-sec-title">Edukasi Stunting</h2>
+    <p class="gs-sec-sub">Pahami stunting dari penyebab hingga pencegahan.</p>
+    <div class="gs-edu-grid">
+      <div class="gs-edu-card"><div class="ic">&#128206;</div><h3>Apa itu Stunting?</h3><p>Stunting adalah kondisi gagal tumbuh pada anak balita akibat kekurangan gizi kronis dan infeksi berulang, terutama pada 1.000 Hari Pertama Kehidupan (HPK). Anak stunting memiliki tinggi badan lebih pendek dari standar usianya.</p></div>
+      <div class="gs-edu-card"><div class="ic">&#10069;</div><h3>Penyebab Stunting</h3><p>Bersifat multifaktorial &mdash; gabungan faktor gizi, lingkungan, dan sosial-ekonomi.</p><div class="gs-mini"><span>&#127859; Gizi buruk</span><span>&#128688; Sanitasi</span><span>&#128106; Pola asuh</span><span>&#128176; Ekonomi</span></div></div>
+      <div class="gs-edu-card"><div class="ic">&#9888;</div><h3>Dampak Stunting</h3><p>Berdampak jangka pendek dan panjang pada kualitas hidup anak.</p><div class="gs-mini"><span>&#129504; Perkembangan otak</span><span>&#128737; Imunitas</span><span>&#127891; Prestasi belajar</span></div></div>
+      <div class="gs-edu-card"><div class="ic">&#9989;</div><h3>Pencegahan Stunting</h3><div class="gs-check"><div><span class="ck">&#10003;</span><span><b>ASI eksklusif</b> selama 6 bulan pertama.</span></div><div><span class="ck">&#10003;</span><span><b>Gizi seimbang &amp; MPASI</b> tepat waktu.</span></div><div><span class="ck">&#10003;</span><span><b>Rutin ke Posyandu</b> untuk pantau tumbuh kembang.</span></div><div><span class="ck">&#10003;</span><span><b>Air bersih &amp; sanitasi</b> yang layak.</span></div></div></div>
+    </div>
+    <div class="gs-didyou"><div class="big">19,8%</div><p><b>Tahukah kamu?</b> Prevalensi stunting nasional tahun 2024 sebesar 19,8% (SSGI), masih di atas target WHO yaitu di bawah 20%. Jawa Barat menyumbang jumlah balita stunting terbanyak secara nasional.</p></div>
+  </div>
+</section>
+
+<!-- ====== TENTANG ====== -->
+<section class="gs-page" id="page-tentang">
+  <div class="gs-wrap">
+    <span class="gs-eyebrow">Tentang</span>
+    <h2 class="gs-sec-title">Tentang Penelitian</h2>
+    <p class="gs-sec-sub">Sistem Informasi Geografis Berbasis WebGIS untuk Pemetaan dan Analisis Spasial Stunting.</p>
+    <div class="gs-about-card"><h3>Latar Belakang</h3><p style="color:#475569;line-height:1.7;margin:0">Penelitian ini dilatarbelakangi oleh tingginya angka stunting di Kecamatan Kiaracondong, yang tercatat sebagai penyumbang kasus tertinggi di Kota Bandung. Melalui teknologi WebGIS, penelitian ini memetakan distribusi kasus stunting, mengidentifikasi pola spasial, dan menyediakan platform informasi yang dapat diakses pemangku kepentingan untuk mendukung pengambilan keputusan dan intervensi yang tepat sasaran.</p></div>
+    <div class="gs-about-card"><h3>Metodologi &mdash; Model R&amp;D Prototype</h3><div class="gs-flow"><div class="gs-step"><div class="n">1</div><strong>Communication</strong><span>Identifikasi kebutuhan</span></div><div class="gs-step"><div class="n">2</div><strong>Quick Planning</strong><span>Perencanaan</span></div><div class="gs-step"><div class="n">3</div><strong>Modeling</strong><span>Desain cepat</span></div><div class="gs-step"><div class="n">4</div><strong>Construction</strong><span>Pembuatan prototype</span></div><div class="gs-step"><div class="n">5</div><strong>Deployment</strong><span>Uji &amp; umpan balik</span></div></div></div>
+    <div class="gs-about-card"><h3>Sumber Data</h3><div class="gs-src-grid"><div class="gs-src"><div class="ic">&#127973;</div><b>e-PPGBM</b><span>Dinkes Kota Bandung</span></div><div class="gs-src"><div class="ic">&#128202;</div><b>BPS</b><span>Kota Bandung</span></div><div class="gs-src"><div class="ic">&#128506;</div><b>BIG / Bappeda</b><span>Data spasial</span></div><div class="gs-src"><div class="ic">&#127758;</div><b>OpenStreetMap</b><span>Basemap</span></div></div></div>
+    <div class="gs-about-card"><h3>Peneliti</h3><div class="gs-researcher"><div class="gs-avatar">IN</div><div><b style="color:var(--navy);font-size:17px">Ismail Nurul Hakim</b><div style="color:#64748b;font-size:14px">Departemen Pendidikan Geografi<br>Universitas Pendidikan Indonesia &middot; 2026</div></div></div></div>
+  </div>
+  <div class="gs-foot"><b>GeoStunting</b> &mdash; WebGIS Pemetaan Stunting Kiaracondong<br>Kontak: 123inismail@gmail.com &middot; Data untuk tujuan akademik &amp; informasi publik, bukan komersial.<br>&copy; 2026 GeoStunting. Skripsi Pendidikan Geografi UPI.</div>
+</section>
+<script src="script.js"></script>
+</body>
+</html>
