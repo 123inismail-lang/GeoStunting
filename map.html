@@ -11733,7 +11733,7 @@ var map = new ol.Map({
 });
 
 //initial view - epsg:3857 coordinates if not "Match project CRS"
-map.getView().fit(jsonSource_KecamatanKiaracondong_2.getExtent(), {size: map.getSize(), padding: [30, 30, 30, 30]});
+map.getView().fit(jsonSource_KecamatanKiaracondong_2.getExtent(), {size: map.getSize(), padding: [80, 80, 80, 80], maxZoom: 14.4});
 
 //full zooms only
 map.getView().setProperties({constrainResolution: true});
@@ -12880,5 +12880,20 @@ document.addEventListener('DOMContentLoaded', function() {
         bottomRightContainerDiv.appendChild(attributionControl);
     }
 </script>        
-    </body>
+    <script>
+(function(){
+  function norm(s){return (s||'').toString().toLowerCase().replace(/[^a-z]/g,'');}
+  function focusByName(nama){
+    try{
+      var src=(typeof jsonSource_KASUSSTUNTING_3!=='undefined')?jsonSource_KASUSSTUNTING_3:jsonSource_KecamatanKiaracondong_2;
+      if(!nama||nama==='all'){ map.getView().fit(jsonSource_KecamatanKiaracondong_2.getExtent(),{size:map.getSize(),padding:[80,80,80,80],maxZoom:14.4,duration:500}); return; }
+      var t=norm(nama), fs=src.getFeatures(), f=null,i;
+      for(i=0;i<fs.length;i++){ if(norm(fs[i].get('NAMOBJ'))===t){f=fs[i];break;} }
+      if(!f){ for(i=0;i<fs.length;i++){ var n=norm(fs[i].get('NAMOBJ')); if(n&&(n.indexOf(t)>-1||t.indexOf(n)>-1)){f=fs[i];break;} } }
+      if(f){ map.getView().fit(f.getGeometry().getExtent(),{size:map.getSize(),padding:[60,60,60,60],duration:600,maxZoom:16}); }
+    }catch(e){}
+  }
+  window.addEventListener('message',function(ev){ var d=ev.data||{}; if(d&&d.type==='gsFocusKel'){ focusByName(d.nama); } });
+})();
+</script></body>
 </html>

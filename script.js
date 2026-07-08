@@ -19,7 +19,12 @@ function renderMini(){let h='';sorted.forEach(k=>{const w=(k.prev/sorted[0].prev
 function renderTable(filterNama){let h='';sorted.forEach(k=>{const dim=(filterNama&&filterNama!=='all'&&k.nama!==filterNama)?' style="opacity:.32"':'';h+='<tr'+dim+'><td><b>'+k.nama+'</b></td><td>'+k.balita+'</td><td>'+k.kasus+'</td><td>'+pill(k.prev)+' '+fmt(k.prev)+'%</td><td>'+rankBadge(k.rank)+'</td></tr>';});document.getElementById('tblBody').innerHTML=h;}
 
 function fillFilter(){const s=document.getElementById('filterKel');KEL.forEach(k=>{const o=document.createElement('option');o.value=k.nama;o.textContent=k.nama;s.appendChild(o);});}
-function focusKelurahan(v){renderTable(v);}
+function normNama(s){return (s||'').toString().toLowerCase().replace(/[^a-z]/g,'');}
+function postFocus(nama){['mapDash','mapPeta'].forEach(function(id){var f=document.getElementById(id);if(f&&f.contentWindow){f.contentWindow.postMessage({type:'gsFocusKel',nama:nama},'*');}});}
+function focusKelurahan(v){renderTable(v);renderSearchResult(v);postFocus(v&&v!=='all'?v:'all');var sel=document.getElementById('filterKel');if(sel&&sel.value!==v)sel.value=v;}
+function searchKelurahan(){var q=(document.getElementById('searchKel').value||'').trim();var box=document.getElementById('searchResult');if(!q){focusKelurahan('all');return;}var nq=normNama(q);var found=KEL.find(function(k){var n=normNama(k.nama);return n===nq||n.indexOf(nq)>-1||nq.indexOf(n)>-1;});if(found){focusKelurahan(found.nama);}else if(box){box.innerHTML='<div class="gs-noresult">Kelurahan "'+q+'" tidak ditemukan. Coba: Babakan Sari, Babakan Surabaya, Cicaheum, Kebon Kangkung, Kebon Jayanti, Sukapura.</div>';}}
+function renderSearchResult(v){var box=document.getElementById('searchResult');if(!box)return;if(!v||v==='all'){box.innerHTML='';return;}var k=KEL.find(function(x){return x.nama===v;});if(!k){box.innerHTML='';return;}box.innerHTML='<div class="gs-sr-card"><div class="gs-sr-h">'+k.nama+' '+pill(k.prev)+'</div><div class="gs-sr-grid"><div><span>Prevalensi</span><b>'+fmt(k.prev)+'%</b></div><div><span>Kasus</span><b>'+k.kasus+'</b></div><div><span>Balita</span><b>'+k.balita+'</b></div><div><span>Ranking</span><b>#'+k.rank+'</b></div></div></div>';}
+function printMap(iframeId){var f=document.getElementById(iframeId);if(f&&f.contentWindow){try{f.contentWindow.focus();f.contentWindow.print();}catch(e){window.print();}}}
 
 function downloadCSV(){let c='Kelurahan,Jumlah Balita,Kasus,Prevalensi (%),Ranking\n';sorted.forEach(k=>{c+=k.nama+','+k.balita+','+k.kasus+','+fmt(k.prev)+','+k.rank+'\n';});const b=new Blob([c],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='data-stunting-kiaracondong.csv';a.click();}
 
